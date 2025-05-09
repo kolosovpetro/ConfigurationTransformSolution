@@ -1,4 +1,4 @@
-﻿name: Run on hosted Windows
+name: Run on hosted Windows
 
 on:
   push:

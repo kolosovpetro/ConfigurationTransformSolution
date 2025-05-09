@@ -1,4 +1,4 @@
-﻿name: Run on self-hosted Windows
+name: Run on self-hosted Windows
 
 on:
   push:

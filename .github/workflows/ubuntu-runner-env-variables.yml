@@ -1,4 +1,4 @@
-﻿name: Run on hosted Ubuntu
+name: Run on hosted Ubuntu
 
 on:
   push:
