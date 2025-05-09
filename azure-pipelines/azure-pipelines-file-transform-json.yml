@@ -1,0 +1,41 @@
+trigger:
+  batch: true
+  branches:
+    include:
+      - master
+  paths:
+    include:
+      - '*'
+
+variables:
+  - name: System.Debug
+    value: true
+
+stages:
+  - stage: 'FileTransformJSON'
+    variables:
+      - group: Variable_Group_File_Transform_JSON
+    displayName: 'FileTransformJSON'
+    jobs:
+      - job: 'FileTransformJSON'
+        displayName: 'FileTransformJSON'
+        pool:
+          vmImage: 'ubuntu-latest'
+
+        steps:
+          - bash: |
+              cat file-transform-json-azdo-task/appsettings.json
+            displayName: Print before transform
+
+          - task: FileTransform@2
+            displayName: 'File transform v2 XML'
+            inputs:
+              folderPath: '$(System.DefaultWorkingDirectory)/file-transform-json-azdo-task'
+              enableXmlTransform: false
+              errorOnInvalidSubstitution: true
+              xmlTransformationRules: ''
+              jsonTargetFiles: 'appsettings.json'
+
+          - bash: |
+              cat file-transform-json-azdo-task/appsettings.json
+            displayName: Print after transform
