@@ -7,6 +7,10 @@ trigger:
     include:
       - '*'
 
+variables:
+  - name: System.Debug
+    value: true
+
 stages:
   - stage: 'FileTransformXML'
     displayName: 'FileTransformXML'
