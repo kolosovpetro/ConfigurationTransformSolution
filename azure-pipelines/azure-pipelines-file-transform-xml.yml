@@ -1,0 +1,34 @@
+trigger:
+  batch: true
+  branches:
+    include:
+      - master
+  paths:
+    include:
+      - '*'
+
+stages:
+  - stage: 'FileTransformXML'
+    displayName: 'FileTransformXML'
+    jobs:
+      - job: 'FileTransformXML'
+        displayName: 'FileTransformXML'
+        pool:
+          vmImage: 'ubuntu-latest'
+
+        steps:
+          - bash: |
+              cat file-transform-xml-azdo-task/Web.config
+            displayName: Print XML initial
+
+          - task: FileTransform@2
+            displayName: 'File transform v2 XML'
+            inputs:
+              folderPath: '$(System.DefaultWorkingDirectory)/file-transform-xml-azdo-task'
+              enableXmlTransform: true
+              xmlTransformationRules: '-transform **\*.Release.config -xml **\*.config'
+              xmlTargetFiles: 'Web.config'
+
+          - bash: |
+              cat file-transform-xml-azdo-task/Web.config
+            displayName: Print XML transformed
