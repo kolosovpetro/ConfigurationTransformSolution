@@ -37,6 +37,8 @@ stages:
               enableRecursion: false
               useLegacyPattern: false
               enableTelemetry: true
+              tokenPrefix: '#{'
+              tokenSuffix: '}#'
 
           - bash: |
               cat replace-tokens-azdo-task/appsettings.json
