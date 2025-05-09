@@ -8,12 +8,13 @@ Automate configuration file transformations using Azure DevOps or GitHub Actions
 
 - Scans specified files for tokens like `#{VariableName}#`
 - Replaces each token with the corresponding pipeline or environment variable value
+- Supports any text format
 
 ### FileTransform@2 (Azure DevOps)
 
 - Supports XML and JSON configuration file transformations
 - Automatically substitutes values from pipeline variables
-- XML transformations support XDT transforms (e.g., Web.Release.config)
+- XML transformations support XDT transforms (Windows only)
 - JSON substitutions update specified key paths
 
 ## Supported Pipelines
@@ -26,6 +27,7 @@ Automate configuration file transformations using Azure DevOps or GitHub Actions
 ### GitHub Actions
 
 - Token and JSON substitution via [devops-actions/variable-substitution](https://github.com/devops-actions/variable-substitution)
+- Token and JSON substitution [Example](https://github.com/kolosovpetro/AzureAppServiceDeployments/blob/master/.github/workflows/app-service-deploy.yml)
 
 ## Changelog
 
