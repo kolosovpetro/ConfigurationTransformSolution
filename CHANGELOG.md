@@ -8,3 +8,7 @@ and this project adheres to [Semantic Versioning v2.0.0](https://semver.org/spec
 ## v1.0.0 - In Progress
 
 ### Changed
+
+- Implement `ReplaceTokens` transformation pipeline
+- Implement `FileTransform@2` XML transformation pipeline (windows only)
+- Implement `FileTransform@2` JSON transformation pipeline
