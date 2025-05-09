@@ -32,7 +32,6 @@ stages:
               enableXmlTransform: true
               enableXmlVariableSubstitution: false
               xmlTransformationRules: '-transform Web.Release.config -xml Web.config'
-              xmlTargetFiles: 'Web.config'
 
           - bash: |
               cat file-transform-xml-azdo-task/Web.config
