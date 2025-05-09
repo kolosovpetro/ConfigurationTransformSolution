@@ -30,7 +30,7 @@ stages:
             inputs:
               folderPath: '$(System.DefaultWorkingDirectory)/file-transform-xml-azdo-task'
               enableXmlTransform: true
-              xmlTransformationRules: '-transform **\*.Release.config -xml **\*.config'
+              xmlTransformationRules: '-transform Web.Release.config -xml Web.config'
               xmlTargetFiles: 'Web.config'
 
           - bash: |
