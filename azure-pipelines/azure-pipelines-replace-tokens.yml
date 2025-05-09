@@ -8,21 +8,25 @@ trigger:
       - '*'
 
 stages:
-  - stage: 'Replace_Tokens'
+  - stage: 'ReplaceTokens'
     variables:
-      - group: REPLACE_TOKENS_JSON_VARS
+      - group: Variable_Group_Replace_Tokens
     displayName: 'ReplaceTokens'
     jobs:
-      - job: 'Build'
-        displayName: 'Replace Tokens'
+      - job: 'ReplaceTokens'
+        displayName: 'ReplaceTokens'
         pool:
           vmImage: 'ubuntu-latest'
 
         steps:
+          - bash: |
+              cat replace-tokens-azdo-task/appsettings.json
+            displayName: Print JSON initial
+
           - task: replacetokens@5
             displayName: 'Replace tokens in JSON'
             inputs:
-              targetFiles: '$(System.DefaultWorkingDirectory)/azure-pipelines-yaml/replace-tokens-json-xml-azure-pipelines/appsettings.json'
+              targetFiles: '$(System.DefaultWorkingDirectory)/replace-tokens-azdo-task/appsettings.json'
               encoding: 'auto'
               tokenPattern: 'default'
               writeBOM: true
@@ -35,6 +39,5 @@ stages:
               enableTelemetry: true
 
           - bash: |
-              cat appsettings.json
-            displayName: Print JSON contents
-            workingDirectory: '$(System.DefaultWorkingDirectory)/azure-pipelines-yaml/replace-tokens-json-xml-azure-pipelines'
+              cat replace-tokens-azdo-task/appsettings.json
+            displayName: Print JSON transformed
