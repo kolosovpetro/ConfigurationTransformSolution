@@ -1,0 +1,45 @@
+trigger:
+  batch: true
+  branches:
+    include:
+      - master
+  paths:
+    include:
+      - '*'
+
+stages:
+  - stage: 'ReplaceTokens'
+    variables:
+      - group: Variable_Group_Replace_Tokens
+    displayName: 'ReplaceTokens'
+    jobs:
+      - job: 'ReplaceTokens'
+        displayName: 'ReplaceTokens'
+        pool:
+          vmImage: 'ubuntu-latest'
+
+        steps:
+          - bash: |
+              cat replace-tokens-azdo-task/appsettings.json
+            displayName: Print JSON initial
+
+          - task: replacetokens@5
+            displayName: 'Replace tokens in JSON'
+            inputs:
+              targetFiles: '$(System.DefaultWorkingDirectory)/replace-tokens-azdo-task/appsettings.json'
+              encoding: 'auto'
+              tokenPattern: 'default'
+              writeBOM: true
+              actionOnMissing: 'warn'
+              keepToken: false
+              actionOnNoFiles: 'continue'
+              enableTransforms: false
+              enableRecursion: false
+              useLegacyPattern: false
+              enableTelemetry: true
+              tokenPrefix: '#{'
+              tokenSuffix: '}#'
+
+          - bash: |
+              cat replace-tokens-azdo-task/appsettings.json
+            displayName: Print JSON transformed
