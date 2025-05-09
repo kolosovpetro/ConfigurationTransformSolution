@@ -18,7 +18,7 @@ stages:
       - job: 'FileTransformXML'
         displayName: 'FileTransformXML'
         pool:
-          vmImage: 'ubuntu-latest'
+          vmImage: 'windows-latest'
 
         steps:
           - bash: |
@@ -30,8 +30,9 @@ stages:
             inputs:
               folderPath: '$(System.DefaultWorkingDirectory)/file-transform-xml-azdo-task'
               enableXmlTransform: true
-              enableXmlVariableSubstitution: false
-              xmlTransformationRules: '-transform Web.Release.config -xml Web.config'
+              errorOnInvalidSubstitution: true
+              xmlTransformationRules: '-transform **\*.Release.config -xml **\*.config'
+              xmlTargetFiles: 'Web.config'
 
           - bash: |
               cat file-transform-xml-azdo-task/Web.config
